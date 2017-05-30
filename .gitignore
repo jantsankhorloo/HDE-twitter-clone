@@ -1,0 +1,22 @@
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+# Django stuff:
+*.log
+# dotenv
+.env
+
+# virtualenv
+.venv
+venv/
+ENV/
+
+/bin
+*.swp
+*.pyc
+.Python
+client_secrets.json
+.DS_Store

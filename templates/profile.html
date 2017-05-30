@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href ="/static/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/static/css/home.css" rel="stylesheet">
+        <link type="text/css" rel="stylesheet" href="/static/css/simplePagination.css">
+
+        <title>Witty {{ user }}</title>
+        <style>
+            ul#follow li {display: inline;}
+
+        </style>
+    </head>
+    <style>
+        #edit {   float:left; }
+        #delete { float:right; }
+        .showup { display:none; }
+        #posttext { word-wrap: break-word; }
+    </style>
+
+    <nav class="navbar navbar-inverse navbar-default navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <ul class="nav navbar-nav navbar-center"><a class="navbar-brand" href="/home">Witter</a></ul>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <ul class="nav navbar-nav navbar-left"><li><a href="/feed/{{ id }}">Feed</a></li></ul>
+            <ul class="nav navbar-nav navbar-left"><li><a href="/profile/{{ id }}">Profile</a></li></ul>
+            <ul class="nav navbar-nav navbar-right"><li><a href="/logout">Logout</a></li></ul>
+          </ul>
+          <ul class="nav navbar-nav navbar-right"><li><font color="white">Logged in as {{ user }}</font></li></ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                {% with messages = get_flashed_messages() %}
+                    {% for message in messages %}
+                        <div class="alert alert-danger">{{ message }}</div>
+                    {% endfor %}
+                {% endwith %}
+            <table>
+                <tr valign="top">
+                    <td><img src="{{ avatar }}" class="img-circle avatar" alt="user profile image" style="width:100px;height:100px"></td>
+                    <td><h1> {{ username }} </h1></td>
+                </tr>
+            </table>
+
+            <div align="inline">
+                <strong>Followed by:</strong>         
+                    {% for each in follow_names %}
+                        {% if each != None %}
+                            <a href="/profile/{{ follow_names_id[each] }}">{{ each }}</a>,
+                        {% endif %}
+                    {% endfor %}
+            </div>
+            {% if id == session_id %}
+                <div align="inline">
+                    <strong>Following:</strong> 
+                        {% for each in following_names %}
+                            {% if each != None %}
+                                 <a href="/profile/{{ following_names_id[each] }}">{{ each }}</a>,
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+    
+            {% if session_id != id %}
+                <div class="container">
+                    <a class="btn btn-info" href="/followprofile/{{ session_id }}">Follow</a>
+                    <a class="btn btn-info" href="/unfollowprofile/{{ session_id }}">Unfollow</a>
+                </div>
+            {% endif %}
+            {% if session_id == id %}
+
+                <div class="container">
+                    <div class="row">
+                        <div class="span4 well" style="padding-bottom:0">
+                            <form accept-charset="UTF-8" action="/post/prof/{{ session_id }}" method="POST" enctype="multipart/form-data">
+                                <textarea class="span4" id="text" name="text" placeholder="Type in your message" rows="3"></textarea>
+                                <span id="characters">140</span> characters remaining
+                                <div class="form-group">
+                                    <label for="img">Upload Image:</label>
+                                    <input type="file" class="filestyle" name="img" accept="image/*">
+                                </div>
+                                <button class="btn btn-info" type="submit">Post New Message</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+            </div>
+            <div class="col-md-8">
+                <h1 class="page-header">Profile Timeline</h1>
+
+                    {% for tweet in tweets %}
+                    <div class="paginate">
+                        <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm-8">
+                                    <div class="panel panel-white post panel-shadow">
+                                        <div class="post-heading">
+                                            <div class="pull-left image">
+                                                <img src="{{ tweet.avatar }}" class="img-circle avatar" alt="user profile image" style="width:50px;height:50px">
+                                            </div>
+                                            <div class="pull-left meta">
+                                                <div class="title h5">
+                                                    {% if tweet.retweet == 1 %}
+                                                        <a href="/profile/{{ tweet['session_id'] }}"><b>{{ tweet.user }}</b></a> retweets <b><a href="/profile/{{ tweet['retweet_user_id'] }}">{{ tweet.retweet_from }}'s </a><a href="/original_retweet/prof{{ tweet['old_id'] }}">post</a></b>  
+                                                    {% endif %}
+                                                    {% if tweet.retweet == 0 %}
+                                                        <a href="/profile/{{ tweet['session_id'] }}"><b>{{ tweet.user }}</b></a> 
+                                                    {% endif %}    
+                                                </div>
+                                                <h6 class="text-muted time"><span class="timestamp">{{ tweet.time }}</span></h6>
+                                            </div>
+                                        </div> 
+                                        <div id="posttext" class="post-description"> 
+
+                                            {% if tweet['hashtag'] == 1 %}
+                                                <p class="lead"><strong>
+                                                    {{ tweet.left_text }} 
+                                                    <a href="/hashtag/{{ tweet['id'] }}">#{{ tweet.hashtag_text}}</a>
+                                                    {{ tweet.right_text }}
+                                                </strong></p>                                           
+                                            {% endif%}
+
+
+                                            {% if tweet['hashtag'] == 0 %}
+                                                <p class="lead"><strong> {{ tweet.text }} </strong></p>
+                                            {% endif%}
+                                    
+                                        
+                                        {% if tweet["img"] %}
+                                            <p><img src="data:image/png;base64,{{ tweet['img'] }}" height="300" width="300"/></p>
+                                        {% endif %}
+                                
+                                        {% if id == tweet['session_id']  %}         
+                                            {%if tweet['retweet'] == 0 %}
+                                            <div id="edit">
+                                                <div class="click"><button type="button" class="btn btn-primary">Edit</button></div>
+                                                <div class="showup">
+                                                    <form action="{{ url_for('edit', tweet_id = 'prof'+tweet['id']) }}" method="post" enctype="multipart/form-data">                                                 
+                                                        <label for="text"></label>
+                                                        <input type="text" name="text" value="{{ tweet.text }}">
+                                                                                                
+                                                        <label for="img">Edit Image:</label>
+                                                        <input type="file" class="filestyle" name="img" accept="image/*">
+                                                    
+                                                        <input type="submit" value="Submit Edit">                                        
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            {% endif %}
+                                            <div id="delete">
+                                                <a href="/delete/prof{{ tweet['id'] }}" class="btn btn-danger">Delete</a>
+                                            </div>
+                                        {% endif %} 
+                                        {% if id != tweet['session_id']  %} 
+                                            <a href="/retweet/prof{{ tweet['id'] }}" class="btn btn-success">Retweet</a>
+                                        {% endif %}
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <div id="page-nav"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/moment.min.js"></script>
+    <script src="/static/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/js/jquery.simplePagination.js"></script>
+    <script src="/static/js/main.js"></script>
+    <script type="text/javascript" charset="utf-8">
+        $(".timestamp").html(function(i, old) {
+            return moment.unix(old).format('llll');
+        });
+    </script>
+    <script type="text/javascript">
+        $('textarea').keyup(updateCount);
+        $('textarea').keydown(updateCount);
+
+        function updateCount() {
+            var cs = $(this).val().length;
+            $('#characters').text(140 - cs);
+        }
+    </script>
+    <script type="text/javascript"> 
+        $(document).ready(function () {
+            $('.click').click(function (e) {
+                e.stopPropagation();
+                var target = $(this).parent().find('.showup');
+                $('.showup').not(target).slideUp("fast");
+                target.slideToggle("fast");
+            });
+            $(".showup").on("click", function (e) {
+                e.stopPropagation();
+            });
+        });
+        $(document).on("click", function () {
+            $(".showup").slideUp("fast");
+        });
+    </script>
+
+  </body>
+</html>
