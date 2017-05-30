@@ -20,3 +20,5 @@ ENV/
 .Python
 client_secrets.json
 .DS_Store
+temp.pub
+temp.pub.pub
