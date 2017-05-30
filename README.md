@@ -1,5 +1,7 @@
 # jay-twitter-clone: WITTER - post something witty~
 
+This project is a learning objective project while I was a software engineering intern at HDE, Inc Tokyo, Japan.
+
 ## Twitter Clone Objectives:
 
 - dont change user from nginx in /etc/nginx/nginx.conf
