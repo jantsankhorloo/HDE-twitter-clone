@@ -2,7 +2,7 @@
 
 This project is a learning project when I was a software engineering intern at HDE, Inc Tokyo, Japan.
 
-HDE, Inc is a japanese B2B cloud security company with over 74% market share. I was an intern in their Cloud Research Product Development team.
+[HDE, Inc](https://www.hde.co.jp/en/) is a japanese B2B cloud security company with over 74% market share. I was an intern in their Cloud Research Product Development team.
 
 ## Twitter Clone Objectives:
 
