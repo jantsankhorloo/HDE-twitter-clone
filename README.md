@@ -1,6 +1,8 @@
 # jay-twitter-clone: WITTER - post something witty~
 
-This project is a learning objective project while I was a software engineering intern at HDE, Inc Tokyo, Japan.
+This project is a learning project when I was a software engineering intern at HDE, Inc Tokyo, Japan.
+
+HDE, Inc is a japanese B2B cloud security company with over 74% market share. I was an intern in their Cloud Research Product Development team.
 
 ## Twitter Clone Objectives:
 
@@ -20,9 +22,3 @@ This project is a learning objective project while I was a software engineering 
 - Deployed on AWS/EC2: jay.aws.prd.demodesu.com
 - Unit testing on signing in and out, posting texts and images on home, profile and feed
 - Enabled HTTPS with gninx/gunicorn as web server
-
-### Todo:
-
-
-
-
