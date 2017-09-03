@@ -2,7 +2,7 @@
 
 This project is a learning project when I was a software engineering intern at HDE, Inc Tokyo, Japan.
 
-[HDE, Inc](https://www.hde.co.jp/en/) is a japanese B2B cloud security company with over 74% market share. I was an intern in their Cloud Research Product Development team.
+[HDE, Inc](https://www.hde.co.jp/en/) is a Japanese B2B cloud security company with over 74% market share. I was an intern in their Cloud Research Product Development team.
 
 [Here](https://medium.com/@hdeglobalintern/jay-intern-life-and-6-weeks-in-tokyo-c3d2fdf9a6de) is a blog post I wrote about my internship and stay in Tokyo, Japan. It is posted on the company's Medium blogging website.
 
