@@ -6,12 +6,6 @@ This project is a learning project when I was a software engineering intern at H
 
 [Here](https://medium.com/@hdeglobalintern/jay-intern-life-and-6-weeks-in-tokyo-c3d2fdf9a6de) is a blog post I wrote about my internship and stay in Tokyo, Japan. It is posted on the company's Medium blogging website.
 
-## Twitter Clone Objectives:
-
-- dont change user from nginx in /etc/nginx/nginx.conf
-
-## Twitter Clone Summary
-
 ### Features:
 - Posting, Editing, Deleting, and Image Uploading using S3/Boto3
 - Following and Unfollowing
