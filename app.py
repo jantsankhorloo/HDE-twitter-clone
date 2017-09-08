@@ -1,10 +1,5 @@
 #!/usr/bin/env python
-from flask import Flask, render_template, request, redirect, url_for, session, flash
-from werkzeug.utils import secure_filename
-from lib import s3, handler, google
-from oauth2client import client
-from flask_oauth import OAuth
-from redis import Redis
+# Libraries in Python
 import hashlib
 import config
 import base64
@@ -12,6 +7,16 @@ import boto3
 import time
 import uuid
 import os
+
+# Secondary Libraries
+from flask import Flask, render_template, request, redirect, url_for, session, flash
+from werkzeug.utils import secure_filename
+from oauth2client import client
+from flask_oauth import OAuth
+from redis import Redis
+
+# Library written by me
+from lib import s3, handler, google
 
 redis = Redis(host='localhost')
 
